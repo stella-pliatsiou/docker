@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  lint-python:
+    build:
+      context: .
+      dockerfile: Dockerfile-python-linter
+    volumes:
+      - .:/app
+    command: pylint /app
+
+  scan-secrets:
+    build:
+      context: .
+      dockerfile: Dockerfile-trufflehog
+    volumes:
+      - .:/app
+
+  nmap-scan:
+    build:
+      context: .
+      dockerfile: Dockerfile-nmap
+    network_mode: "host"
+
+  sqlmap-scan:
+    build:
+      context: .
+      dockerfile: Dockerfile-sqlmap
+    volumes:
+      - .:/app

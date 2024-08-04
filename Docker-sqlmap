@@ -1,0 +1,8 @@
+FROM python:3.8-slim
+
+RUN pip install sqlmap
+
+WORKDIR /app
+COPY . /app
+
+CMD ["sh", "-c", "sqlmap -r endpoints.txt --batch --output-dir=./sqlmap_results"]
